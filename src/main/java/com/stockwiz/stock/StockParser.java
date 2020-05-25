@@ -14,8 +14,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 @Slf4j
-public class StockDataParser
+public class StockParser
 {
+	private static final String TEMP_DIR = System.getProperty ("java.io.tmpdir") + "/";
+
 	public static void parseDataFiles ()	throws IOException {
 		//parseStockData ();
 		parseDataFile (new File("/stockwiz/CNOB.html"));
@@ -31,7 +33,7 @@ public class StockDataParser
 	
 	private static void parseStockData () throws IOException	{
 		List<Path> paths = 
-			Files.list(Paths.get(Constants.TEMP_DIR))
+			Files.list(Paths.get(TEMP_DIR))
 					.filter(path -> Files.isRegularFile(path))
 					.filter(path -> path.getFileName().toString().endsWith("html"))
 					.sorted()
@@ -51,7 +53,7 @@ public class StockDataParser
 	
 	private static void parseDataFile (File filePath) throws IOException	{
 		Document doc = Jsoup.parse(filePath, "UTF-8", "http://example.com/");
-		Stock stock = Stock.buildStock(doc);
+		Stock stock = new Stock("GOOG", 1400);//Stock.buildStock(doc);
 		stocks.add(stock);
 	}
 	
