@@ -1,4 +1,4 @@
-package com.stockwiz.stock;
+package com.proinvestor.stock;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class StockParser
 
 	public static void parseDataFiles ()	throws IOException {
 		//parseStockData ();
-		parseDataFile (new File("/stockwiz/CNOB.html"));
+		parseDataFile (new File("/proinvestor/CNOB.html"));
 	}
 	
 	public static List<Stock> getStockData ()	{

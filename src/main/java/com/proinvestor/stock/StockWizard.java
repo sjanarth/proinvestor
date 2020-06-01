@@ -1,4 +1,4 @@
-package com.stockwiz.stock;
+package com.proinvestor.stock;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ public class StockWizard
 	}
 	
 	private static void tellMeWhatToBuy() throws IOException	{
-		StockDataDownloader.refreshDataFiles();
+		StockDownloader.refreshDataFiles();
 		/*Parser.parseDataFiles();
 		List<Stock> stocks = Parser.getStocks();
 		for (Stock stock : stocks)	{

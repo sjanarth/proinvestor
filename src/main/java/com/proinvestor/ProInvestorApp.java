@@ -1,12 +1,12 @@
-import lombok.extern.slf4j.Slf4j;
+package com.proinvestor;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@Slf4j
 @SpringBootApplication
-public class StockWizardApp
+public class ProInvestorApp
 {
     public static void main(String[] args)  {
-        SpringApplication.run(StockWizardApp.class, args);
+        SpringApplication.run(ProInvestorApp.class, args);
     }
 }

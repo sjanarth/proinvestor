@@ -1,18 +1,25 @@
-package com.stockwiz.stock;
+package com.proinvestor.stock;
 
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import lombok.*;
 
-import com.stockwiz.util.TextUtils;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-import lombok.Getter;
-import lombok.ToString;
-
-@Getter @ToString(doNotUseGetters = true) 
+//@Getter
+//@ToString(doNotUseGetters = true)
+@Data
+@Builder
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Stock //implements Comparable<Stock>
 {
-	private Stock () {}
+	@Id
+	@NonNull
+	private String ticker;
+	private double price;
 
+	/*
 	public static Stock buildStock(Document doc)	
 	{
 		Stock stock = new Stock();
@@ -70,15 +77,12 @@ public class Stock //implements Comparable<Stock>
 
 		return stock;
 	}
-	
-	private static void sop (String s) {
-		System.out.println(s);
-	}
-	
+	*/
+
 	/*
 	 * 	<td width="7%" class="snapshot-td2-cp" align="left" title="cssbody=[tooltip_short_bdy] cssheader=[tooltip_short_hdr] body=[Diluted EPS (ttm)] offsetx=[10] offsety=[20] delay=[300]">EPS (ttm)</td>
 	 * 	<td width="8%" class="snapshot-td2" align="left"><b>2.08</b></td>
-	 */
+	 * /
 	private static String getFieldData(Document doc, String fieldName) {
 		Elements elements = doc.select("td[class]:contains("+fieldName+"):first-child");
 		String text = elements.next().text();
@@ -88,7 +92,7 @@ public class Stock //implements Comparable<Stock>
 	/*
 	 * 	<td width="7%" class="snapshot-td2-cp" align="left" title="cssbody=[tooltip_short_bdy] cssheader=[tooltip_short_hdr] body=[Price-to-Earnings (ttm)] offsetx=[10] offsety=[20] delay=[300]">P/E</td>
 	 * 	<td width="8%" class="snapshot-td2" align="left"><b><span style="color:#008800;">5.42</span></b></td>
-	 */
+	 * /
 	private static String getFieldData2(Document doc, String fieldName) {
 		Elements elements = doc.select("td[class]:contains("+fieldName+")");
 		String text = elements.next().text();

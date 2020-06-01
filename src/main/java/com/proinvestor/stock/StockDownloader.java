@@ -1,4 +1,4 @@
-package com.stockwiz.stock;
+package com.proinvestor.stock;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Slf4j
-public class StockDataDownloader
+public class StockDownloader
 {
 	private static final long TWO_DAYS_IN_MILLIS = 2 * 24 * 60 * 60 * 1000;
 
