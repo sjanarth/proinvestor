@@ -8,9 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-@Service
+//@Service
 public class StockService
 {
+    /*
     @Autowired
     private StockRepository stockRepository;
 
@@ -38,4 +39,6 @@ public class StockService
         log.info("Deleting Stock - "+ticker);
         stockRepository.deleteById(ticker);
     }
+
+     */
 }

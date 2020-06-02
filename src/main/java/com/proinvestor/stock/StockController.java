@@ -5,9 +5,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+//@RestController
 public class StockController
 {
+    /*
     @Autowired
     private StockService stockService;
 
@@ -35,4 +36,6 @@ public class StockController
     public void deleteStock (@PathVariable String ticker) {
         stockService.deleteStock(ticker);
     }
+
+     */
 }

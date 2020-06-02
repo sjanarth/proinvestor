@@ -2,19 +2,14 @@ package com.proinvestor.stock;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
 //@Getter
 //@ToString(doNotUseGetters = true)
 @Data
 @Builder
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Stock //implements Comparable<Stock>
 {
-	@Id
 	@NonNull
 	private String ticker;
 	private double price;
@@ -29,8 +24,8 @@ public class Stock //implements Comparable<Stock>
 		stock.industry = doc.select(".tab-link").select("a[href^=screener.ashx]").first().nextElementSibling().text();
 		stock.geo = doc.select(".tab-link").select("a[href^=screener.ashx]").last().text();
 		
-		stock.isSNP = getFieldData(doc, "Index").contains("S&P500");
-		stock.isDJIA = getFieldData(doc, "Index").contains("DJIA");
+		stock.isSNP = getFieldData(doc, "com.proinvestor.index.Index").contains("S&P500");
+		stock.isDJIA = getFieldData(doc, "com.proinvestor.index.Index").contains("DJIA");
 		stock.marketCap = TextUtils.parseMillions (getFieldData(doc, "Market Cap")); 
 		stock.income = TextUtils.parseMillions (getFieldData(doc, "Income"));
 		stock.sales = TextUtils.parseMillions (getFieldData(doc, "Sales"));
