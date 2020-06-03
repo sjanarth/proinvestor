@@ -1,8 +1,6 @@
 package com.proinvestor.dataprovider;
 
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 @Slf4j
@@ -14,19 +12,23 @@ public class ApmexDataProvider extends AbstractMultiDataProvider
     public static final String PALLADIUM_PRICE = "#apmex.palladium";
 
     public ApmexDataProvider() {
-        super("http://www.apmex.com");
+        super("http://www.apmex.com", DataFormat.HTML);
     }
 
     @Override
     protected void parseDocument() {
         Elements elements = document.select("div.price > span.current");
-        Element gold = elements.get(0);
-        data.put(GOLD_PRICE, parseElement(gold));
-        Element silver = elements.get(1);
-        data.put(SILVER_PRICE, parseElement(silver));
-        Element platinum = elements.get(2);
-        data.put(PLATINUM_PRICE, parseElement(platinum));
-        Element palladium = elements.get(3);
-        data.put(PALLADIUM_PRICE, parseElement(palladium));
+        Double curValue = parseElement(elements.get(0));
+        log.info("Gold Price = "+curValue);
+        data.put(GOLD_PRICE, curValue);
+        curValue = parseElement(elements.get(1));
+        log.info("Silver Price = "+curValue);
+        data.put(SILVER_PRICE, curValue);
+        curValue = parseElement(elements.get(2));
+        log.info("Platinum Price = "+curValue);
+        data.put(PLATINUM_PRICE, curValue);
+        curValue = parseElement(elements.get(3));
+        log.info("Palladium Price = "+curValue);
+        data.put(PALLADIUM_PRICE, curValue);
     }
 }

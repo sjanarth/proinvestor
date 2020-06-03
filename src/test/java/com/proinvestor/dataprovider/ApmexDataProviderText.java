@@ -8,7 +8,7 @@ import org.junit.rules.Timeout;
 public class ApmexDataProviderText
 {
     @Rule
-    public Timeout globalTimeout = Timeout.seconds(3);
+    public Timeout globalTimeout = Timeout.seconds(5);
 
     @Test
     public void testMetals() {

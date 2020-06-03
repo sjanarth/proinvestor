@@ -1,38 +1,20 @@
 package com.proinvestor.dataprovider;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
-import java.io.IOException;
-import java.time.Duration;
-import java.time.Instant;
-
-@Slf4j
-@Data
-@AllArgsConstructor
-public abstract class AbstractSimpleDataProvider implements SimpleDataProvider
+public abstract class AbstractSimpleDataProvider extends AbstractBaseDataProvider implements SimpleDataProvider
 {
-    protected abstract double parseData(Document doc) throws NumberFormatException;
+    public AbstractSimpleDataProvider(@NonNull String dataProviderUrl, @NonNull DataFormat dataFormat) {
+        super(dataProviderUrl, dataFormat);
+    }
 
     @Override
     public double fetchCurrentValue()   {
-        try {
-            log.info("Fetching "+dataProviderUrl);
-            Instant start = Instant.now();
-            Document doc = Jsoup.connect(dataProviderUrl).get();
-            Instant end = Instant.now();
-            log.info("Completed fetching in "+ Duration.between(start, end));
-            return parseData(doc);
-        } catch (IOException | NumberFormatException e) {
-            log.error("", e);
-            return 0;
-        }
+        refresh();
+        return data.get(getKey());
     }
 
-    @NonNull
-    protected String dataProviderUrl;
+    protected String getKey()   {
+        return "#" + getClass() + "." + dataProviderUrl;
+    }
 }

@@ -2,22 +2,20 @@ package com.proinvestor.dataprovider;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 @Slf4j
 public class ZillowDataProvider extends AbstractSimpleDataProvider
 {
     public ZillowDataProvider(@NonNull String dataProviderUrl) {
-        super(dataProviderUrl);
+        super(dataProviderUrl, DataFormat.HTML);
     }
 
     @Override
-    protected double parseData(Document doc) throws NumberFormatException {
-        Elements elements = doc.select("div.zestimate.primary-quote > div");
-        String text = elements.first().text();
-        double curValue = Double.parseDouble(text.substring(1).replaceAll(",", ""));
+    protected void parseDocument() throws NumberFormatException {
+        Elements elements = document.select("div.zestimate-value");
+        double curValue = parseElement(elements.first());
         log.info("curValue = "+curValue);
-        return curValue;
+        data.put(getKey(), curValue);
     }
 }
